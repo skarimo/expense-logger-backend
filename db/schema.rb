@@ -24,9 +24,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_125434) do
   create_table "expenses", force: :cascade do |t|
     t.integer "category_id"
     t.integer "user_id"
+    t.string "date"
     t.integer "total_amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

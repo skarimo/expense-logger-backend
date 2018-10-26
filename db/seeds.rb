@@ -17,8 +17,10 @@ Category.create(name: "Personal")
 Category.create(name: "Other")
 
 
-User.create(first_name: "test_user", password: "123", email: "123@test")
+User.create(first_name: "test_user", last_name: "test_user", username: "123", password: "123", email: "123@test")
 
-Expense.create(category_id: 1, user_id: 1, total_amount: 20)
-Expense.create(category_id: 2, user_id: 1, total_amount: 40)
-Expense.create(category_id: 3, user_id: 1, total_amount: 50)
+Expense.create(category_id: 1, user_id: 1, date: "01/05/10", total_amount: 20)
+Expense.create(category_id: 1, user_id: 1, date: "02/05/10", total_amount: 10)
+Expense.create(category_id: 1, user_id: 1, date: "03/05/10", total_amount: 30)
+Expense.create(category_id: 2, user_id: 1, date: "04/05/10", total_amount: 40)
+Expense.create(category_id: 3, user_id: 1, date: "05/05/10", total_amount: 50)
