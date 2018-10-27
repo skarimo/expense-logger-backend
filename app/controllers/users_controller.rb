@@ -46,7 +46,7 @@ skip_before_action :authenticate_request, only: %i[login register]
 
 
   def user_params
-    params.permit(:username, :email, :password, :first_name, :last_name)
+    params.permit(:username, :email, :password, :first_name, :last_name, :category_id)
   end
 
   def token_params
