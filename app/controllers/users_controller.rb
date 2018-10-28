@@ -40,7 +40,6 @@ skip_before_action :authenticate_request, only: %i[login register]
   def update_bill_shares
     @bill_share = BillShare.find(params[:bill_share])
     amount = @bill_share.amount
-    debugger
     amount += (params[:amount_to_add]).to_f
     @bill_share.update(amount: amount)
     render json: @bill_share
@@ -82,6 +81,7 @@ skip_before_action :authenticate_request, only: %i[login register]
     @friendship.destroy
     render json: {pending: @user.requested_friendships}
   end
+
 
 
   private
