@@ -72,13 +72,14 @@ skip_before_action :authenticate_request, only: %i[login register]
   end
 
   def reject_request
+    @user = User.find(params[:user_id])
     @friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
     if @friendship == nil
       @friendship = Friendship.find_by(user_id: params[:friend_id], friend_id: params[:user_id])
     end
     @friendship.bill_shares.destroy
     @friendship.destroy
-    render json: {message: 'Success'}
+    render json: {pending: @user.requested_friendships}
   end
 
 
