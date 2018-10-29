@@ -44,19 +44,24 @@ skip_before_action :authenticate_request, only: %i[login register]
     @bill_share.update(amount: amount)
     render json: @bill_share
   end
+  # if (@friend != nil) && (@friend.id != params[:id]) && (!@user.friends.include?(@friend) && (!@friend.pending.include?(@user)))
 
   def friend_request
     @user = User.find(params[:id])
-    @friend = User.find_by(username: params[:username])
-    if (@friend != nil) && (@friend.id != params[:id]) && (!@user.friends.include?(@friend) && (!@friend.pending.include?(@user)))
-      friendship = Friendship.create(user_id: params[:id], friend_id: @friend.id)
-      render :json => { :message => "Success" }, :status => 200
-    elsif @friend.pending.include?(@user)
-      render :json => { :errors => "Already Requested" }, :status => 400
-    elsif @friend == nil
-      render :json => { :errors => "Invalid username" }, :status => 400
+    if (User.find_by(username: params[:username]))
+      @friend = User.find_by(username: params[:username])
+      if (@friend != nil) && (@friend.id != params[:id]) && (!@user.friends.include?(@friend) && (!@friend.pending.include?(@user)))
+        friendship = Friendship.create(user_id: params[:id], friend_id: @friend.id)
+        return render :json => { :message => "Success" }, :status => 200
+      elsif @friend.pending.include?(@user)
+        return render :json => { :errors => "Already Requested" }, :status => 400
+      elsif @friend == nil
+        return render :json => { :errors => "Invalid username" }, :status => 400
+      else
+        return render :json => { :errors => "Invalid username" }, :status => 400
+      end
     else
-       render :json => { :errors => "Invalid username" }, :status => 400
+      return render :json => { :errors => "Invalid username" }, :status => 400
     end
   end
 
