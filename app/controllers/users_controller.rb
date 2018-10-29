@@ -85,7 +85,7 @@ skip_before_action :authenticate_request, only: %i[login register]
     end
     @friendship.bill_shares.destroy
     @friendship.destroy
-    render json: {pending: @user.received_friends}
+    render json: {pending: @user.pending}
   end
 
 
