@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_011345) do
   create_table "bill_shares", force: :cascade do |t|
     t.integer "friendship_id"
     t.integer "user_id"
-    t.decimal "amount", precision: 10, scale: 2
+    t.decimal "amount", precision: 40, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

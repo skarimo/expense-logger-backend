@@ -48,12 +48,13 @@ skip_before_action :authenticate_request, only: %i[login register]
   def friend_request
     @user = User.find(params[:id])
     @friend = User.find_by(username: params[:username])
-
     if (@friend != nil) && (@friend.id != params[:id]) && (!@user.friends.include?(@friend) && (!@friend.pending.include?(@user)))
       friendship = Friendship.create(user_id: params[:id], friend_id: @friend.id)
-      render json: {id: @friend.id,first_name: @friend.first_name,last_name: @friend.last_name, username: @friend.username, email: @friend.email}
+      render :json => { :message => "Success" }, :status => 200
     elsif @friend.pending.include?(@user)
       render :json => { :errors => "Already Requested" }, :status => 400
+    elsif @friend == nil
+      render :json => { :errors => "Invalid username" }, :status => 400
     else
        render :json => { :errors => "Invalid username" }, :status => 400
     end
@@ -79,7 +80,7 @@ skip_before_action :authenticate_request, only: %i[login register]
     end
     @friendship.bill_shares.destroy
     @friendship.destroy
-    render json: {pending: @user.requested_friendships}
+    render json: {pending: @user.received_friends}
   end
 
 
