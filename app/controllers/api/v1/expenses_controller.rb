@@ -6,7 +6,7 @@ class Api::V1::ExpensesController < ApplicationController
   end
 
   def create
-    @expense = Expense.create(expense_params)
+    @expense = Expense.create(category_id: params[:category_id], user_id: params[:user_id], total_amount: params[:total_amount].to_f, date: params[:date])
     render json: @expense
   end
 
