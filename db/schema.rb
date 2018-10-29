@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_011345) do
+ActiveRecord::Schema.define(version: 2018_10_29_151233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_011345) do
     t.integer "category_id"
     t.integer "user_id"
     t.string "date"
-    t.integer "total_amount"
+    t.decimal "total_amount", precision: 40, scale: 2
   end
 
   create_table "friendships", force: :cascade do |t|
