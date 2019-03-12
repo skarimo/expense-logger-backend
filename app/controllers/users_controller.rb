@@ -23,14 +23,9 @@ skip_before_action :authenticate_request, only: %i[login register]
   end
 
   def test
-    @requested = {test: 'test'}
-      if (request.headers["Cookie"]["test"])
-        @requested = request.headers["Cookie"]["test"]
-      end
     @user = JsonWebToken.decode(request.headers["Authorization"])
     render json: {
-          user: @user,
-          abc: @requested
+          user: @user
         }
   end
 
