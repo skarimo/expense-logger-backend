@@ -25,7 +25,8 @@ skip_before_action :authenticate_request, only: %i[login register]
   def test
     @user = JsonWebToken.decode(request.headers["Authorization"])
     render json: {
-          user: @user
+          user: @user,
+          request: request
         }
   end
 
